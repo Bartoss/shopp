@@ -5,7 +5,7 @@
 --%>
 
 
-            <div id="centerColumn">
+            <div id="singleColumn">
 
                 <p>Your shopping cart contains x items.</p>
 

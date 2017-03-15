@@ -5,13 +5,18 @@
  */
 package controller;
 
+import entity.Category;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.CategoryFacade;
 
 /**
  *
@@ -27,6 +32,16 @@ import javax.servlet.http.HttpServletResponse;
             "/purchase",
             "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
+
+    @EJB
+    private CategoryFacade categoryFacade;
+
+    @Override
+    public void init() throws ServletException {
+
+        // store category list in servlet context
+        getServletContext().setAttribute("categories", categoryFacade.findAll());
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,8 +60,23 @@ public class ControllerServlet extends HttpServlet {
 
         // if category page is requested
         if (userPath.equals("/category")) {
-            // TODO: Implement category request
+            //get categoryId from request
+            String categoryId = request.getQueryString();
 
+            if(categoryId != null){
+                
+                // get selected category
+                Category selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
+                
+                // place selected category in request scoper
+                request.setAttribute("selectedCategory", selectedCategory);
+                
+                //get all products for selected category
+                Collection<Product> categoryProducts = selectedCategory.getProductCollection();
+                
+                //place selected category in request scope
+                request.setAttribute("categoryProducts", categoryProducts);
+            }
             // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
             // TODO: Implement cart page request
