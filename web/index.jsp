@@ -8,7 +8,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <div class="row">
-    <div class="col-4 welcomeText">
+    <div class="col-4 indexLeftColimn">
         <p style="font-size: larger">Welcome to the online home of the Affable Bean Green Grocer.</p>
 
         <p>Enjoy browsing and learning more about our unique home delivery
@@ -16,7 +16,7 @@
             and other delicious and healthy items to your doorstep.</p>
     </div>
 
-    <div class="col-8 categories">
+    <div class="col-8 indexRightColumn">
         <c:forEach var="category" items="${categories}">
             <div class="categoryBox">
                 <a href="category?${category.id}">
