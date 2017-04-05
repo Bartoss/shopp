@@ -14,10 +14,7 @@ Description: Style rules for the shop aplication
 
 body {
     font-family: "Lucida Sans", sans-serif;
-    
     text-align: center;
-   
-    color: #444;
 }
 
 .col-1 {width: 8.33%;}
@@ -234,22 +231,25 @@ label { line-height: 30px }
     text-align: center;
 }
 
-#subtotal { margin: 0 0 0 0 }
+#subtotal { margin: 0 0 0 0; }
 
-#cartTable { width: 750px }
+#cartTable { 
+    margin: 0 0 0 0;
+    float: inherit;
+}
 
 #cartTable td {
     width: 145px;
     height: 90px;
+    float: inherit;
 }
 
 
 /* checkout page styles */
 #checkoutTable {
-    width: 405px;
-    padding: 10px;
+
     background-color: #f5eabe;
-    float: left;
+   
 }
 
 #checkoutTable td {
@@ -291,7 +291,7 @@ label { line-height: 30px }
 
 .summaryColumn {
     margin-top: 15px;
-    width: 50%;
+    
     float: left;
 }
 

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author tgiunipero
+ * @author bartek
  */
 @Entity
 @Table(name = "ordered_product")

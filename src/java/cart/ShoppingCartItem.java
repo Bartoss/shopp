@@ -9,7 +9,7 @@ import entity.Product;
 
 /**
  *
- * @author tgiunipero
+ * @author bartek
  */
 public class ShoppingCartItem {
 

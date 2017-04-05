@@ -1,13 +1,14 @@
 <%--
     Document   : cart
-    Created on : May 20, 2010, 12:20:12 AM
-    Author     : tgiunipero
+    Created on : 
+    Author     : bartek
 --%>
 
+
 <div class="row">
+    
     <div class="col-12 singleColumn">
-        
-            <c:choose>
+        <c:choose>
         <c:when test="${cart.numberOfItems > 1}">
             <p>Your shopping cart contains ${cart.numberOfItems} items.</p>
         </c:when>
@@ -22,7 +23,12 @@
     <div class="col-12 actionBar">
         <%-- clear cart widget --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <a href="viewCart?clear=true" class="bubble hMargin">clear cart</a>
+
+            <c:url var="url" value="viewCart">
+                <c:param name="clear" value="true"/>
+            </c:url>
+
+            <a href="${url}" class="bubble hMargin">clear cart</a>
         </c:if>
 
         <%-- continue shopping widget --%>
@@ -39,11 +45,12 @@
             </c:choose>
         </c:set>
 
-        <a href="${value}" class="bubble hMargin">continue shopping</a>
+        <c:url var="url" value="${value}"/>
+        <a href="${url}" class="bubble hMargin">continue shopping</a>
 
         <%-- checkout widget --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <a href="checkout" class="bubble hMargin">proceed to checkout</a>
+            <a href="<c:url value='checkout'/>" class="bubble hMargin">proceed to checkout &#x279f;</a>
         </c:if>
     </div>
 
@@ -79,7 +86,7 @@
             </td>
 
             <td>
-                <form action="updateCart" method="post">
+                <form action="<c:url value='updateCart'/>" method="post">
                     <input type="hidden"
                            name="productId"
                            value="${product.id}">
@@ -101,10 +108,6 @@
       </table>
 
     </c:if>
-        
     </div>
+    
 </div>
-<!--<div id="singleColumn">
-
-</div>
-        -->
