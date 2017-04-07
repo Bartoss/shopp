@@ -110,6 +110,7 @@ label { line-height: 30px }
 #header {
     padding: 30px;
     height: 250px;
+    
 }
 
 #logo {
@@ -120,6 +121,7 @@ label { line-height: 30px }
 
 #widgetBar {
     float: left;
+    padding: 30px;
 }
 
 #cart {
@@ -350,4 +352,4 @@ label { line-height: 30px }
 
 @media only screen and (max-width: 768px) {
 /* For mobile phones: */ [class*="col-"] {
-width: 100%; }
+width: 100%; }}

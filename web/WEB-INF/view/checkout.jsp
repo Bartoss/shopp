@@ -121,15 +121,6 @@
                                id="address"
                                name="address"
                                value="${param.address}">
-
-                        <br>
-                        prague
-                        <select name="cityRegion">
-                            <c:forEach begin="1" end="10" var="regionNumber">
-                                <option value="${regionNumber}"
-                                        <c:if test="${param.cityRegion eq regionNumber}">selected</c:if>>${regionNumber}</option>
-                            </c:forEach>
-                        </select>
                     </td>
                 </tr>
                 <tr>
