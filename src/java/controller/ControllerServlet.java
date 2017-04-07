@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import cart.ShoppingCart;
@@ -29,14 +28,14 @@ import validate.Validator;
  * @author bartek
  */
 @WebServlet(name = "Controller",
-            loadOnStartup = 1,
-            urlPatterns = {"/category",
-                           "/addToCart",
-                           "/viewCart",
-                           "/updateCart",
-                           "/checkout",
-                           "/purchase",
-                           "/chooseLanguage"})
+        loadOnStartup = 1,
+        urlPatterns = {"/category",
+            "/addToCart",
+            "/viewCart",
+            "/updateCart",
+            "/checkout",
+            "/purchase",
+            "/chooseLanguage"})
 public class ControllerServlet extends HttpServlet {
 
     private String surcharge;
@@ -62,6 +61,7 @@ public class ControllerServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -97,8 +97,7 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("categoryProducts", categoryProducts);
             }
 
-
-        // if cart page is requested
+            // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
 
             String clear = request.getParameter("clear");
@@ -111,8 +110,7 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/cart";
 
-
-        // if checkout page is requested
+            // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
 
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
@@ -121,11 +119,21 @@ public class ControllerServlet extends HttpServlet {
             cart.calculateTotal(surcharge);
 
             // forward to checkout page and switch to a secure channel
-
-
-        // if user switches language
+            // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
-            // TODO: Implement language request
+            // get language choice
+            String language = request.getParameter("language");
+
+            // place in request scope
+            request.setAttribute("language", language);
+
+            // forward request to welcome page
+            try {
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return;
 
         }
 
@@ -139,9 +147,9 @@ public class ControllerServlet extends HttpServlet {
         }
     }
 
-
     /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -152,7 +160,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
-                                                // 8-bit Unicode (e.g., for Czech characters)
+        // 8-bit Unicode (e.g., for Czech characters)
 
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
@@ -181,8 +189,7 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/category";
 
-
-        // if updateCart action is called
+            // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
 
             // get input from request
@@ -191,7 +198,7 @@ public class ControllerServlet extends HttpServlet {
 
             boolean invalidEntry = validator.validateQuantity(productId, quantity);
 
-                if (!invalidEntry) {
+            if (!invalidEntry) {
 
                 Product product = productFacade.find(Integer.parseInt(productId));
                 cart.update(product, quantity);
@@ -199,8 +206,7 @@ public class ControllerServlet extends HttpServlet {
 
             userPath = "/cart";
 
-
-        // if purchase action is called
+            // if purchase action is called
         } else if (userPath.equals("/purchase")) {
 
             if (cart != null) {
@@ -247,7 +253,7 @@ public class ControllerServlet extends HttpServlet {
 
                         userPath = "/confirmation";
 
-                    // otherwise, send back to checkout page and display error
+                        // otherwise, send back to checkout page and display error
                     } else {
                         userPath = "/checkout";
                         request.setAttribute("orderFailureFlag", true);
