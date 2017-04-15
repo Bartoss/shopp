@@ -3,9 +3,10 @@
     Created on : 05.04.2017
     Author     : bs
 --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%-- Set session-scoped variable to track the view user is coming from.
+     This is used by the language mechanism in the Controller so that
+     users view the same page when switching between English and Czech. --%>
+<c:set var='view' value='/index' scope='session' />
 
 <div class="row">
     <div class="col-4 indexLeftColimn">

@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author bs
+ * @author bartek
  */
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> {

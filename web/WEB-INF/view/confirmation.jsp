@@ -1,7 +1,7 @@
 <%--
     Document   : confirmation
     Created on : Sep 9, 2009, 12:20:30 AM
-    Author     : tgiunipero
+    Author     : bs
 --%>
 
 
