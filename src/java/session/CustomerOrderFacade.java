@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author tgiunipero
+ * @author bartek
  */
 @Stateless
 public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
@@ -32,6 +32,13 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
         CustomerOrder order = em.find(CustomerOrder.class, id);
         em.refresh(order);
         return order;
+    }
+
+    // manually created
+    // in this implementation, there is only one order per customer
+    // the data model however allows for multiple orders per customer
+    public CustomerOrder findByCustomer(Object customer) {
+        return (CustomerOrder) em.createNamedQuery("CustomerOrder.findByCustomer").setParameter("customer", customer).getSingleResult();
     }
 
 }
