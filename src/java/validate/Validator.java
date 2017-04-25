@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package validate;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author bartek
+ * @author bartus
  */
 public class Validator {
 

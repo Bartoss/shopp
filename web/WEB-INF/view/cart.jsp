@@ -6,7 +6,7 @@
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
      users view the same page when switching between English and Polish. --%>
-<c:set var='view' value='/cart' scope='session' />
+<c:set var="view" value="/cart" scope="session"/>
 
 <div class="row">
     
@@ -56,7 +56,6 @@
             <a href="<c:url value='checkout'/>" class="bubble hMargin"><fmt:message key="proceedCheckout"/></a>
         </c:if>
     </div>
-
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
       <h4 id="subtotal"><fmt:message key="subtotal"/>:
@@ -78,7 +77,7 @@
 
           <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
-              <img src="${initParam.productImagePath}${product.name}.png"
+                <img src="${initParam.productImagePath}${product.name}.png"
                      alt="<fmt:message key="${product.name}"/>">
             </td>
 

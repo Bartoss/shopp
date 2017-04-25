@@ -1,6 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
  */
 
 package controller;
@@ -16,10 +19,7 @@ import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import session.CategoryFacade;
 import session.OrderManager;
 import session.ProductFacade;
@@ -27,7 +27,7 @@ import validate.Validator;
 
 /**
  *
- * @author bartek
+ * @author tgiunipero
  */
 @WebServlet(name = "Controller",
             loadOnStartup = 1,
@@ -49,6 +49,7 @@ public class ControllerServlet extends HttpServlet {
     @EJB
     private OrderManager orderManager;
 
+
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
@@ -60,6 +61,7 @@ public class ControllerServlet extends HttpServlet {
         // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
+
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -76,6 +78,7 @@ public class ControllerServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Category selectedCategory;
         Collection<Product> categoryProducts;
+
 
         // if category page is requested
         if (userPath.equals("/category")) {
@@ -181,6 +184,7 @@ public class ControllerServlet extends HttpServlet {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         Validator validator = new Validator();
 
+
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
 
@@ -213,7 +217,7 @@ public class ControllerServlet extends HttpServlet {
 
             boolean invalidEntry = validator.validateQuantity(productId, quantity);
 
-                if (!invalidEntry) {
+            if (!invalidEntry) {
 
                 Product product = productFacade.find(Integer.parseInt(productId));
                 cart.update(product, quantity);
